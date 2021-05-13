@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>random user App | v!N</title>
+<!-- 	<meta http-equiv="refresh" content="30">
+ -->	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/18fc5b7198.js" crossorigin="anonymous"></script>
+	<link rel="shortcut icon" type="image/ico" href="./favicon.ico">
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+			box-sizing: border-box;
+			font-family: consolas;
+		}
+
+		body{
+			min-height: 100vh;
+			display: flex;
+			background: linear-gradient(45deg,#F0FBCD,#F582BA,#75AFC7);
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			width: 80%;
+			margin: 20px auto;
+			overflow: hidden;
+		}
+
+        img{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid black ;
+        }
+
+        data{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffff;
+            text-align: center;
+        }
+        button{
+            padding: 10px;
+            border: none;
+            margin: 20px auto;
+            color: green;
+            font-size: 20px;
+        }
+
+	</style>
+
+</head>
+<body>
+    <div class="data">
+        <h1 id="name"></h1>
+        <h3 id="mail"></h3>
+        <h2 id="age"></h2>
+        <h3 id="loc"></h3>
+        <h4 id="gender"></h4>
+        <img src="" alt="" id="img">
+        <br>
+        <button onclick="myfunc()" id="vin" style="align-items: center;">user</button>
+    </div>
+
+
+
+<script>
+
+
+
+const url="https://randomuser.me/api";
+console.log(url);
+
+
+async function myfunc(){
+    const website=await fetch(url);
+    const data=await website.json();
+    console.log(data);
+    const gen=(data.results[0].gender);
+    document.getElementById('gender').innerHTML=gen;
+    const gendernew=document.getElementById('gender');
+    if (gendernew.innerHTML==="male") {
+        document.getElementById('img').style.borderColor="blue";
+    }else{
+        document.getElementById('img').style.borderColor="pink";
+     }
+    const fn=(data.results[0].name.first);
+    const ln=(data.results[0].name.last);
+    const email=(data.results[0].email);
+    document.getElementById('mail').innerHTML=email;
+    const age=(data.results[0].dob.age)
+    document.getElementById('age').innerHTML=age;
+    const loc=(data.results[0].location.country);
+    document.getElementById('loc').innerHTML=loc;
+    const img=(data.results[0].picture.large);
+    const name=`${fn} ${ln} `;
+    document.getElementById('name').innerHTML=name;
+
+    document.getElementById('img').src=img;
+    document.getElementById('img').alt=name;
+}	
+
+myfunc()
+
+
+
+</script>
+</body>
+</html>
